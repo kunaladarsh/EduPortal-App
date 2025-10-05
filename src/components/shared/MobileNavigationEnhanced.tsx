@@ -1,4 +1,3 @@
-import image_352647a5c8277d52c493b807da35b9cb4eccd186 from 'EduPortal:asset/352647a5c8277d52c493b807da35b9cb4eccd186.png';
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useAuth } from "../../contexts/AuthContext";

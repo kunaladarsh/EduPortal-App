@@ -1,4 +1,5 @@
-import image_352647a5c8277d52c493b807da35b9cb4eccd186 from 'edu:asset/352647a5c8277d52c493b807da35b9cb4eccd186.png';
+// import image_352647a5c8277d52c493b807da35b9cb4eccd186 from 'edu:asset/352647a5c8277d52c493b807da35b9cb4eccd186.png';
+const image_352647a5c8277d52c493b807da35b9cb4eccd186 = "src/assets/352647a5c8277d52c493b807da35b9cb4eccd186.png"; // Use a valid static asset path or placeholder
 // App Configuration Service
 export interface AppConfig {
   appName: string;
