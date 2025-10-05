@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { useAuth } from "../../contexts/AuthContext";
 import { useFeatures } from "../../contexts/FeatureContext";
 import { useAppConfig } from "../../contexts/AppConfigContext";
+import image_352647a5c8277d52c493b807da35b9cb4eccd186 from 'src/assets/352647a5c8277d52c493b807da35b9cb4eccd186.png';
 import { 
   Home, BookOpen, Users, Calendar, MessageSquare, 
   BarChart3, Settings, Bell, Award, Clock, Search,
