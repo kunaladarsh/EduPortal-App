@@ -1,0 +1,464 @@
+@custom-variant dark (&:is(.dark *));
+@custom-variant xs (@media (min-width: 475px));
+
+:root {
+  --font-size: 14px;
+  
+  /* 60% - Dominant: Soft blue-gray neutrals for backgrounds and surfaces */
+  --background: #F8FAFB;
+  --foreground: #334155;
+  --card: #FFFFFF;
+  --card-foreground: #334155;
+  --popover: #FFFFFF;
+  --popover-foreground: #334155;
+  --muted: #F1F5F8;
+  --muted-foreground: #64748B;
+  --border: #E2E8F0;
+  --input: transparent;
+  --input-background: #FFFFFF;
+  --switch-background: #E2E8F0;
+  
+  /* 30% - Secondary: Rich blue tones for primary brand elements */
+  --primary: #3B82F6;
+  --primary-foreground: #FFFFFF;
+  --secondary: #06B6D4;
+  --secondary-foreground: #FFFFFF;
+  
+  /* 10% - Accent: Vibrant orange for CTAs and highlights */
+  --accent: #F97316;
+  --accent-foreground: #FFFFFF;
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+  
+  /* Additional tokens */
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: #3B82F6;
+  
+  /* Chart colors using the 60-30-10 palette */
+  --chart-1: #3B82F6;
+  --chart-2: #06B6D4;
+  --chart-3: #F97316;
+  --chart-4: #10B981;
+  --chart-5: #8B5CF6;
+  
+  --radius: 0.625rem;
+  
+  /* Sidebar using consistent palette */
+  --sidebar: #F8FAFB;
+  --sidebar-foreground: #334155;
+  --sidebar-primary: #3B82F6;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #F1F5F8;
+  --sidebar-accent-foreground: #334155;
+  --sidebar-border: #E2E8F0;
+  --sidebar-ring: #3B82F6;
+}
+
+.dark {
+  /* 60% - Dominant: Deep slate tones for dark mode backgrounds */
+  --background: #0F172A;
+  --foreground: #F1F5F9;
+  --card: #1E293B;
+  --card-foreground: #F1F5F9;
+  --popover: #1E293B;
+  --popover-foreground: #F1F5F9;
+  --muted: #334155;
+  --muted-foreground: #94A3B8;
+  --border: #334155;
+  --input: #1E293B;
+  --input-background: #1E293B;
+  --switch-background: #334155;
+  
+  /* 30% - Secondary: Brighter blue tones for dark mode visibility */
+  --primary: #60A5FA;
+  --primary-foreground: #FFFFFF;
+  --secondary: #22D3EE;
+  --secondary-foreground: #0F172A;
+  
+  /* 10% - Accent: Vibrant orange maintaining consistency */
+  --accent: #FB923C;
+  --accent-foreground: #FFFFFF;
+  --destructive: #F87171;
+  --destructive-foreground: #FFFFFF;
+  
+  /* Additional tokens */
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: #60A5FA;
+  
+  /* Chart colors for dark mode */
+  --chart-1: #60A5FA;
+  --chart-2: #22D3EE;
+  --chart-3: #FB923C;
+  --chart-4: #34D399;
+  --chart-5: #A78BFA;
+  
+  /* Sidebar dark mode */
+  --sidebar: #1E293B;
+  --sidebar-foreground: #F1F5F9;
+  --sidebar-primary: #60A5FA;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #334155;
+  --sidebar-accent-foreground: #F1F5F9;
+  --sidebar-border: #334155;
+  --sidebar-ring: #60A5FA;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    /* Dynamic theming transitions for smooth color changes */
+    transition: background-color 0.2s ease-in-out, 
+                color 0.2s ease-in-out, 
+                border-color 0.2s ease-in-out;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    /* Subtle gradient overlays using the new color palette */
+    background-image: 
+      radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.04) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(249, 115, 22, 0.02) 0%, transparent 50%);
+  }
+
+  /* Mobile app specific styles */
+  body.mobile-app {
+    /* Prevent overscroll bounce on iOS */
+    overscroll-behavior: none;
+    /* Prevent pull-to-refresh */
+    overscroll-behavior-y: contain;
+    /* Better touch handling */
+    touch-action: manipulation;
+    /* Smooth scrolling performance */
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Mobile safe areas */
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .safe-area-left {
+    padding-left: env(safe-area-inset-left);
+  }
+
+  .safe-area-right {
+    padding-right: env(safe-area-inset-right);
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--muted-foreground);
+  }
+
+  /* Focus styles */
+  *:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  /* Mobile-first optimizations for target devices */
+  /* iPhone 13: 390x844, Android Pixel 6: 412x915 */
+  
+  /* Improve tap targets on mobile */
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Better input handling on mobile */
+  input, textarea, select {
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+
+  /* Hide scrollbars on mobile for cleaner look */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Mobile viewport optimizations */
+  @media (max-width: 450px) {
+    /* Extra small mobile devices */
+    .container {
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+    
+    /* Tighter spacing for smaller screens */
+    .mobile-tight {
+      padding: 8px;
+    }
+  }
+
+  /* Optimize for iPhone 13 (390px) and Android Pixel 6 (412px) */
+  @media (min-width: 390px) and (max-width: 430px) {
+    /* Target device optimizations */
+    .mobile-container {
+      max-width: 100%;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+    
+    /* Better button sizing for these devices */
+    .mobile-button {
+      padding: 12px 16px;
+      font-size: 14px;
+    }
+  }
+
+  /* Line clamping utility */
+  .line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  /* Checkbox styling */
+  input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: var(--input-background);
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+
+  input[type="checkbox"]:hover {
+    border-color: var(--primary);
+  }
+
+  input[type="checkbox"]:checked {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  input[type="checkbox"]:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  input[type="checkbox"]:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+/**
+ * Base typography. This is not applied to elements which have an ancestor with a Tailwind text class.
+ */
+@layer base {
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
+    h1 {
+      font-size: var(--text-2xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h2 {
+      font-size: var(--text-xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h3 {
+      font-size: var(--text-lg);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h4 {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    p {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+
+    label {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    button {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    input {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+  }
+}
+
+html {
+  font-size: var(--font-size);
+}
+
+/* Accessibility Enhancement Styles */
+.high-contrast {
+  filter: contrast(150%) brightness(110%);
+}
+
+.high-contrast .bg-muted {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+.focus-visible-enhanced *:focus-visible {
+  outline: 3px solid #3B82F6 !important;
+  outline-offset: 2px !important;
+}
+
+.keyboard-navigation-enhanced button:focus,
+.keyboard-navigation-enhanced a:focus,
+.keyboard-navigation-enhanced input:focus,
+.keyboard-navigation-enhanced select:focus,
+.keyboard-navigation-enhanced textarea:focus {
+  outline: 2px solid #3B82F6 !important;
+  outline-offset: 2px !important;
+}
+
+.screen-reader-optimized .sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+[data-colorblind-mode="protanopia"] {
+  filter: url('#protanopia-filter');
+}
+
+[data-colorblind-mode="deuteranopia"] {
+  filter: url('#deuteranopia-filter');
+}
+
+[data-colorblind-mode="tritanopia"] {
+  filter: url('#tritanopia-filter');
+}
+
+[data-colorblind-mode="achromatopsia"] {
+  filter: grayscale(100%);
+}
+
+/* Accessibility font scaling */
+html[data-accessibility-font-scale] {
+  font-size: calc(var(--font-size, 14px) * var(--accessibility-font-scale, 1)) !important;
+}
+
+/* Accessibility cursor scaling */
+[data-accessibility-cursor-scale] * {
+  cursor: scale(var(--accessibility-cursor-scale, 1)) !important;
+}

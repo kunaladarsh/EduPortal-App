@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Offline - Classroom App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #F8FAFB 0%, #E2E8F0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            color: #334155;
+        }
+        
+        .offline-container {
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            padding: 32px 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .offline-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            background: linear-gradient(135deg, #3B82F6, #06B6D4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+        }
+        
+        .offline-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1E293B;
+        }
+        
+        .offline-message {
+            font-size: 16px;
+            color: #64748B;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+        
+        .offline-features {
+            background: #F8FAFC;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+        
+        .offline-features h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1E293B;
+        }
+        
+        .offline-features ul {
+            list-style: none;
+            text-align: left;
+        }
+        
+        .offline-features li {
+            padding: 6px 0;
+            font-size: 14px;
+            color: #475569;
+            display: flex;
+            align-items: center;
+        }
+        
+        .offline-features li::before {
+            content: "✓";
+            color: #10B981;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .retry-button {
+            background: linear-gradient(135deg, #3B82F6, #06B6D4);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 100%;
+        }
+        
+        .retry-button:hover {
+            transform: translateY(-1px);
+        }
+        
+        .retry-button:active {
+            transform: translateY(0);
+        }
+        
+        .network-status {
+            margin-top: 16px;
+            font-size: 14px;
+            color: #64748B;
+        }
+        
+        .online {
+            color: #10B981;
+        }
+        
+        .offline {
+            color: #EF4444;
+        }
+        
+        @media (max-width: 480px) {
+            .offline-container {
+                padding: 24px 20px;
+            }
+            
+            .offline-icon {
+                width: 64px;
+                height: 64px;
+                font-size: 24px;
+            }
+            
+            .offline-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="offline-icon">
+            📚
+        </div>
+        
+        <h1 class="offline-title">You're Offline</h1>
+        
+        <p class="offline-message">
+            Don't worry! You can still access some features of your classroom app while offline.
+        </p>
+        
+        <div class="offline-features">
+            <h3>Available Offline:</h3>
+            <ul>
+                <li>View cached attendance records</li>
+                <li>Browse your classes and grades</li>
+                <li>Access your profile information</li>
+                <li>Review calendar events</li>
+                <li>Read offline announcements</li>
+            </ul>
+        </div>
+        
+        <button class="retry-button" onclick="tryReconnect()">
+            Try to Reconnect
+        </button>
+        
+        <div class="network-status">
+            Status: <span id="connection-status" class="offline">Offline</span>
+        </div>
+    </div>
+
+    <script>
+        // Check network status
+        function updateConnectionStatus() {
+            const statusElement = document.getElementById('connection-status');
+            if (navigator.onLine) {
+                statusElement.textContent = 'Online';
+                statusElement.className = 'online';
+            } else {
+                statusElement.textContent = 'Offline';
+                statusElement.className = 'offline';
+            }
+        }
+        
+        // Try to reconnect
+        function tryReconnect() {
+            if (navigator.onLine) {
+                window.location.href = '/';
+            } else {
+                // Show feedback that we're still offline
+                const button = document.querySelector('.retry-button');
+                const originalText = button.textContent;
+                button.textContent = 'Still Offline...';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                }, 2000);
+            }
+        }
+        
+        // Listen for online/offline events
+        window.addEventListener('online', updateConnectionStatus);
+        window.addEventListener('offline', updateConnectionStatus);
+        
+        // Auto-redirect when back online
+        window.addEventListener('online', () => {
+            setTimeout(() => {
+                window.location.href = '/';
+            }, 1000);
+        });
+        
+        // Initial status check
+        updateConnectionStatus();
+        
+        // Periodic connectivity check
+        setInterval(() => {
+            updateConnectionStatus();
+        }, 5000);
+    </script>
+</body>
+</html>
