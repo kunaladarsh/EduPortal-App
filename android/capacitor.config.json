@@ -1,0 +1,6 @@
+{
+  "appId": "com.eduportal.app",
+  "appName": "EduPortal",
+  "webDir": "build",
+  "bundledWebRuntime": false
+}
